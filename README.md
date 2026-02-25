@@ -14,10 +14,12 @@ Production-ready MVP for local scheduling workflows on a ThinkPad.
 - `src/` app + domain code
 - `scripts/` operational scripts
 - `config/projects/*.yaml` project configurations
-- `content/weekly/<YYYY-Www>/{Montag..Sonntag}` weekly working folders
-- `archive/<YYYY-Www>` archived weekly content
-- `state/scheduler.db` local SQLite DB
+- `${SOCIAL_SCHEDULER_STORAGE_ROOT}/content/weekly/<YYYY-Www>/{Montag..Sonntag}` weekly working folders
+- `${SOCIAL_SCHEDULER_STORAGE_ROOT}/archive/<YYYY-Www>` archived weekly content
+- `${SOCIAL_SCHEDULER_STORAGE_ROOT}/state/scheduler.db` local SQLite DB
 - `config/cron/crontab.example` cron template
+
+Runtime storage root is controlled by `SOCIAL_SCHEDULER_STORAGE_ROOT` and defaults to `/home/max/social-scheduler-data`.
 
 ## Quickstart
 ```bash
@@ -68,7 +70,7 @@ Scheduler stores records in SQLite table `scheduling_records` with states:
 - `published`: auto-set when filename contains `[published]`
 
 ## Cron Setup
-See `config/cron/crontab.example` and adjust absolute paths for your machine.
+See `config/cron/crontab.example` and adjust `PROJECT_ROOT`, `STORAGE_ROOT`, and `PYTHON` for your machine.
 
 Install the cron template:
 ```bash

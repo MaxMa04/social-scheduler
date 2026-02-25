@@ -1,14 +1,16 @@
 # Local-First Social Scheduler cron template
-# Replace PROJECT_ROOT and PYTHON with your absolute paths.
+# Replace PROJECT_ROOT, STORAGE_ROOT and PYTHON with your absolute paths.
 
 PROJECT_ROOT=/home/max/coding/social-scheduler
+STORAGE_ROOT=/home/max/social-scheduler-data
+SOCIAL_SCHEDULER_STORAGE_ROOT=$STORAGE_ROOT
 PYTHON=/home/max/coding/social-scheduler/.venv/bin/python
 
 # Run scheduler every 20 minutes
-*/20 * * * * cd $PROJECT_ROOT && $PYTHON scripts/run_scheduler.py >> state/scheduler.log 2>&1
+*/20 * * * * cd $PROJECT_ROOT && $PYTHON scripts/run_scheduler.py >> $STORAGE_ROOT/state/scheduler.log 2>&1
 
 # Sunday archive at 20:30 local time
-30 20 * * 0 cd $PROJECT_ROOT && $PYTHON scripts/archive_week.py >> state/archive.log 2>&1
+30 20 * * 0 cd $PROJECT_ROOT && $PYTHON scripts/archive_week.py >> $STORAGE_ROOT/state/archive.log 2>&1
 
 # Daily cleanup at 03:10, delete archive folders older than 20 days
-10 3 * * * cd $PROJECT_ROOT && $PYTHON scripts/cleanup_archive.py --older-than-days 20 >> state/cleanup.log 2>&1
+10 3 * * * cd $PROJECT_ROOT && $PYTHON scripts/cleanup_archive.py --older-than-days 20 >> $STORAGE_ROOT/state/cleanup.log 2>&1
