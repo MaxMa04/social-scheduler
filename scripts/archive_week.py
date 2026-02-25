@@ -17,7 +17,12 @@ def main() -> int:
     args = parser.parse_args()
 
     week_id = args.week or current_week_id()
-    destination = archive_week(week_id=week_id)
+    try:
+        destination = archive_week(week_id=week_id)
+    except (FileNotFoundError, FileExistsError, ValueError) as exc:
+        print(str(exc))
+        return 1
+
     print(f"Archived {week_id} to {destination}")
     return 0
 

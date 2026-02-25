@@ -15,7 +15,12 @@ def main() -> int:
     parser.add_argument("--week", help="ISO week id, e.g. 2026-W09")
     args = parser.parse_args()
 
-    week_path = create_week_scaffold(week_id=args.week)
+    try:
+        week_path = create_week_scaffold(week_id=args.week)
+    except ValueError as exc:
+        print(str(exc))
+        return 1
+
     print(f"Created/ensured week scaffold: {week_path}")
     return 0
 
