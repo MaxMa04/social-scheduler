@@ -1,0 +1,26 @@
+project_name: "Demo Launch"
+timezone: "Europe/Berlin"
+platforms:
+  - name: "youtube"
+    accounts:
+      - handle: "@demo_channel"
+        channel: "Demo Channel"
+        enabled: true
+  - name: "instagram"
+    accounts:
+      - handle: "@demo_ig"
+        channel: "Demo IG"
+        enabled: true
+rules:
+  include_days:
+    - Montag
+    - Dienstag
+    - Mittwoch
+    - Donnerstag
+    - Freitag
+    - Samstag
+    - Sonntag
+  file_extensions:
+    - ".mp4"
+    - ".mov"
+  default_state: "queued"
